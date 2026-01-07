@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Orders</h2>
+
+<form method="POST" action="/add_order" class="row g-3 mb-4">
+  <div class="col-md-3"><input name="customer_id" class="form-control" placeholder="Customer ID" required></div>
+  <div class="col-md-3"><input name="total_amount" class="form-control" placeholder="Amount" required></div>
+  <div class="col-md-3"><input name="order_date" class="form-control" placeholder="YYYY-MM-DD" required></div>
+  <div class="col-md-3"><button class="btn btn-primary w-100">Add Order</button></div>
+</form>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr><th>ID</th><th>Customer</th><th>Amount</th><th>Date</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for o in orders %}
+    <tr>
+      <td>{{ o.OrderID }}</td>
+      <td>{{ o.CustomerID }}</td>
+      <td>${{ o.TotalAmount }}</td>
+      <td>{{ o.OrderDate }}</td>
+      <td>
+        <a href="/edit_order/{{ o.OrderID }}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="/delete_order/{{ o.OrderID }}" class="btn btn-sm btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('table').DataTable();
+  });
+</script>
+{% endblock %}
+

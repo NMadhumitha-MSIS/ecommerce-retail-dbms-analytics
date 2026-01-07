@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Customers</h2>
+
+<form method="post" action="/customers/add" class="mb-3">
+  <input name="first_name" placeholder="First Name" required>
+  <input name="last_name" placeholder="Last Name" required>
+  <input name="email" placeholder="Email" required>
+  <input name="phone" placeholder="Phone Number" required>
+  <button type="submit">Add Customer</button>
+</form>
+
+<a href="/export/customers" class="btn btn-outline-success mb-2">⬇️ Export to CSV</a>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if customers %}
+      {% for c in customers %}
+        <tr>
+          <td>{{ c.CustomerID }}</td>
+          <td>{{ c.FirstName }} {{ c.LastName }}</td>
+          <td>{{ c.Email }}</td>
+          <td>{{ c.PhoneNumber }}</td>
+          <td>
+            <a href="/edit_customer/{{ c.CustomerID }}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="/delete_customer/{{ c.CustomerID }}" class="btn btn-sm btn-danger">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td colspan="5">No customers found.</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('table').DataTable();
+  });
+</script>
+{% endblock %}

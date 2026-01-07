@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Admin Panel</h2>
+
+<div class="mb-3">
+    <a href="/admin/test_connection" class="btn btn-info">Test DB Connection</a>
+  <a href="/admin/run_revenue" class="btn btn-primary">Run Total Revenue SP</a>
+  <a href="/admin/high_value_customers" class="btn btn-secondary">Get High Value Customers</a>
+</div>
+
+{% if revenue %}
+  <div class="alert alert-success">Total Revenue: ${{ revenue }}</div>
+{% endif %}
+
+{% if db_status is defined %}
+  {% if db_status %}
+    <div class="alert alert-success mt-3"> Database connection is active.</div>
+  {% else %}
+    <div class="alert alert-danger mt-3">Database connection failed.</div>
+  {% endif %}
+{% endif %}
+
+{% if high_value_customers %}
+  <h4>High Value Customers</h4>
+  <table class="table table-bordered">
+    <tr><th>ID</th><th>Name</th><th>Email</th></tr>
+    {% for c in high_value_customers %}
+    <tr><td>{{ c.CustomerID }}</td><td>{{ c.FullName }}</td><td>{{ c.Email }}</td></tr>
+    {% endfor %}
+  </table>
+{% endif %}
+{% endblock %}

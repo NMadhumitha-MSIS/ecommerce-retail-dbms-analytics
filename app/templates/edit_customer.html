@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Edit Customer</h2>
+<form method="post">
+  <input name="first_name" value="{{ customer.FirstName }}" required>
+  <input name="last_name" value="{{ customer.LastName }}" required>
+  <input name="email" value="{{ customer.Email }}" required>
+  <input name="phone_number" value="{{ customer.PhoneNumber }}" required>
+  <button type="submit">Update</button>
+  <a href="/customers">Cancel</a>
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('table').DataTable();
+  });
+</script>
+{% endblock %}

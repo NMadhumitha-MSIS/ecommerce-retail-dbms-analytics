@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Shipping Info</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Shipment ID</th>
+      <th>Order ID</th>
+      <th>Status</th>
+      <th>Carrier</th>
+      <th>Tracking Number</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in shipping %}
+    <tr>
+      <td>{{ s.ShipmentID }}</td>
+      <td>{{ s.OrderID }}</td>
+      <td>{{ s.Status }}</td>
+      <td>{{ s.Carrier }}</td>
+      <td>{{ s.TrackingNumber }}</td>
+      <td>{{ s.Address }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('table').DataTable();
+  });
+</script>
+{% endblock %}
+
