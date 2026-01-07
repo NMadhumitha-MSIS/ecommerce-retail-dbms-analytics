@@ -25,6 +25,8 @@ The system supports:
 - Handled 30+ transactional workflows reliably
 
 ## Analytics & Visualization
+### Power BI Dashboard Preview
+![Power BI Dashboard](assets/powerbi_dashboard.png)
 - Built ETL workflows to prepare data for analytics
 - Designed Power BI dashboards to track:
   - Sales trends
